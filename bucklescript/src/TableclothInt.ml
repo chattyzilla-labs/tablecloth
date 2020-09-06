@@ -42,9 +42,13 @@ let ( / ) = ( / )
 
 let ( /. ) n by = Js.Int.toFloat n /. Js.Int.toFloat by
 
-let power ~base ~exponent = Js.Math.pow_int ~base ~exp:exponent
+let power ~base ~exponent =
+  Js.Math.pow_float ~base:(Js.Int.toFloat base) ~exp:(Js.Int.toFloat exponent)
+  |> Float.toInt
+  |> Option.withDefault ~default:0
 
-let ( ** ) base exponent = Js.Math.pow_int ~base ~exp:exponent
+
+let ( ** ) base exponent = power ~base ~exponent
 
 let negate = ( ~- )
 
