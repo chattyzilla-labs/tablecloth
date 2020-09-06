@@ -44,8 +44,8 @@ let ( /. ) n by = Js.Int.toFloat n /. Js.Int.toFloat by
 
 let power ~base ~exponent =
   Js.Math.pow_float ~base:(Js.Int.toFloat base) ~exp:(Js.Int.toFloat exponent)
-  |> Float.toInt
-  |> Option.withDefault ~default:0
+  |> TableclothFloat.toInt
+  |> TableclothOption.unwrap_unsafe
 
 
 let ( ** ) base exponent = power ~base ~exponent
